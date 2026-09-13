@@ -1,0 +1,13 @@
+// Title: Successful Azure role assignment created
+// Data source: AzureActivity
+// MITRE ATT&CK: T1098 - Account Manipulation
+// Purpose: Identify successful RBAC assignment creation for analyst review.
+// Tuning: Exclude approved deployment identities only after validation.
+
+AzureActivity
+| where TimeGenerated >= ago(1h)
+| where OperationNameValue =~ "MICROSOFT.AUTHORIZATION/ROLEASSIGNMENTS/WRITE"
+| where ActivityStatusValue =~ "Success"
+| extend InitiatedBy = tostring(Caller)
+| project TimeGenerated, InitiatedBy, ResourceGroup, ResourceId, CorrelationId, ActivityStatusValue
+| order by TimeGenerated desc
