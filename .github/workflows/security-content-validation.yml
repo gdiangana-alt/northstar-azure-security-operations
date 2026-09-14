@@ -1,0 +1,36 @@
+name: Security Content Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate KQL and documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Validate security content
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f docs/sentinel-live-validation.md
+          ! grep -E "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" docs/sentinel-live-validation.md
+          mapfile -t kql_files < <(find analytics -type f -name "*.kql" | sort)
+          test "${#kql_files[@]}" -gt 0
+          for file in "${kql_files[@]}"; do
+            grep -q "^// Title:" "$file"
+            grep -q "^// Data source:" "$file"
+            grep -q "^// MITRE ATT&CK:" "$file"
+            grep -q "^// Purpose:" "$file"
+            grep -q "^// Tuning:" "$file"
+          done
