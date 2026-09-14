@@ -15,6 +15,12 @@ It extends the NorthStar infrastructure, identity, and DevSecOps portfolio with 
 
 The project separates implemented controls from planned capabilities and does not represent simulated incidents as employer production experience.
 
+## Verified Sentinel Controls
+
+The NorthStar environment includes an enabled Microsoft Sentinel workspace, Fusion, and two verified scheduled analytics rules covering failed Azure control-plane operations and Application Gateway WAF matches.
+
+[View the live validation record](docs/sentinel-live-validation.md)
+
 ## Objectives
 
 - Design a Microsoft Sentinel and Log Analytics monitoring architecture
