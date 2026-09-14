@@ -63,13 +63,13 @@ flowchart LR
 
 | Stage | Outcome | Status |
 |---|---|---|
-| Foundation | Repository, architecture, evidence rules, and incident templates | In progress |
-| Telemetry | Log Analytics and controlled data sources | Planned |
-| Detection | KQL analytics rules and MITRE mappings | Planned |
-| Threat hunting | Investigation hypotheses and reusable queries | Planned |
-| Incident response | Triage, containment, remediation, and reporting | Planned |
-| Automation | SOAR playbook concepts and response automation | Planned |
-| Validation | Simulated incident and sanitized evidence | Planned |
+| Foundation | Repository, architecture, evidence controls, incident templates, and protected GitHub workflow | Complete |
+| Telemetry | Log Analytics, Sentinel, AzureActivity, and Application Gateway WAF telemetry | Verified |
+| Detection | Deployed analytics rules and authored KQL detection content | Verified |
+| Threat hunting | Two MITRE-mapped KQL hunts with aggregate validation | Verified |
+| Incident response | Sanitized triage exercise and manual response playbook | Demonstrated |
+| Automation | Approval-gated Sentinel and Logic App SOAR design | Documented; deployment planned |
+| Validation | Live telemetry and protected-PR validation evidence | Verified |
 
 ## Repository Structure
 
