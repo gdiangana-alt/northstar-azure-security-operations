@@ -87,6 +87,12 @@ northstar-azure-security-operations/
 └── README.md
 ```
 
+## Visual Evidence
+
+The evidence gallery records enabled Sentinel analytics controls, sanitized live telemetry validation, and the protected GitHub delivery gate.
+
+[View the visual evidence gallery](evidence/README.md)
+
 ## Evidence Integrity
 
 The repository will not publish tenant IDs, subscription IDs, workspace IDs, object IDs, credentials, tokens, personal user information, public IP addresses, or reusable authentication material.
