@@ -1,0 +1,20 @@
+// Title: Investigate Application Gateway WAF rule matches
+// Data source: AzureDiagnostics
+// MITRE ATT&CK: T1190 - Exploit Public-Facing Application
+// Purpose: Triage Application Gateway WAF matches to distinguish expected validation traffic from potential web-application attack activity.
+// Tuning: Baseline approved scanners and test traffic; investigate unusual client sources, request paths, or repeated rule matches.
+
+AzureDiagnostics
+| where TimeGenerated >= ago(30d)
+| where ResourceType == "APPLICATIONGATEWAYS"
+| where Category == "ApplicationGatewayFirewallLog"
+| where action_s == "Matched"
+| extend ClientIp = tostring(clientIp_s)
+| summarize
+    wafMatches = count(),
+    firstObserved = min(TimeGenerated),
+    lastObserved = max(TimeGenerated),
+    matchedRules = make_set(tostring(ruleId_s), 10),
+    requestPaths = make_set(tostring(requestUri_s), 10)
+  by ClientIp, tostring(hostname_s)
+| order by wafMatches desc, lastObserved desc

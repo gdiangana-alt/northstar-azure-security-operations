@@ -1,0 +1,17 @@
+// Title: Investigate failed Azure role assignment attempts
+// Data source: AzureActivity
+// MITRE ATT&CK: T1098 - Account Manipulation
+// Purpose: Investigate failed attempts to create Azure RBAC role assignments that may indicate misconfiguration or attempted privilege escalation.
+// Tuning: Exclude approved automation identities only after review; preserve unexpected callers for investigation.
+
+AzureActivity
+| where TimeGenerated >= ago(30d)
+| where OperationNameValue =~ "MICROSOFT.AUTHORIZATION/ROLEASSIGNMENTS/WRITE"
+| where ActivityStatusValue =~ "Failure"
+| extend InitiatedBy = tostring(Caller)
+| summarize
+    failedAttempts = count(),
+    firstObserved = min(TimeGenerated),
+    lastObserved = max(TimeGenerated)
+  by InitiatedBy, ResourceGroup, CorrelationId
+| order by failedAttempts desc, lastObserved desc
