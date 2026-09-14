@@ -25,6 +25,17 @@ The control-plane rule detects unsuccessful Azure administrative operations in t
 
 Microsoft Sentinel Fusion is also enabled. No tactic mappings are configured on the two verified scheduled rules at this time.
 
+## Live Telemetry Validation
+
+Aggregate Log Analytics queries verified that both scheduled rules have matching live telemetry. The queries returned counts and time ranges only; no raw events or resource identifiers were retained.
+
+| Rule | Matching Events | Observed Window | Additional Validation |
+|---|---:|---|---|
+| NorthStar - Failed Azure Control Plane Operation | 3 | September 9–13, 2026 UTC | Exact scheduled-rule filter applied |
+| NorthStar - Application Gateway WAF Rule Match | 571 | September 12–13, 2026 UTC | Events originated from one protected resource |
+
+This confirms the rules are not merely configured: each has received relevant telemetry in the workspace.
+
 ## Repository Relationship
 
 The repository KQL detection for successful Azure role-assignment creation is authored content mapped to MITRE ATT&CK T1098. It remains validation-pending and is not represented as a deployed Sentinel rule.
