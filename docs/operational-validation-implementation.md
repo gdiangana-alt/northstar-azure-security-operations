@@ -1,7 +1,7 @@
 # NorthStar Operational Validation Implementation
 
 **Implementation date:** October 11, 2026
-**Status:** Implemented and locally validated; GitHub-hosted validation pending merge
+**Status:** Verified locally and through GitHub Actions with Azure OIDC
 
 ## Executive Summary
 
@@ -100,6 +100,23 @@ The validator reported:
 - Exit code: 1
 
 This proved that the automation detects drift and can stop a CI/CD workflow.
+## GitHub-Hosted Verification
+
+The `Operational State Validation` workflow completed successfully on October 11, 2026.
+
+Verified workflow stages included:
+
+- Repository checkout
+- Python and YAML-parser setup
+- Passwordless Azure authentication through OIDC
+- Live operational-state validation
+- Sanitized evidence generation
+- Workflow-artifact upload
+- Post-authentication cleanup
+
+All stages succeeded. The workflow uploaded a non-expired sanitized artifact retained for 14 days.
+
+[View the successful GitHub Actions run](https://github.com/gdiangana-alt/northstar-azure-security-operations/actions/runs/38154404431)
 
 ## Operational Value
 
