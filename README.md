@@ -34,7 +34,7 @@ The NorthStar environment includes an enabled Microsoft Sentinel workspace, Fusi
 
 ## Current Implementation Status
 
-NorthStar currently includes verified Microsoft Sentinel analytics controls, live aggregate telemetry validation, MITRE-mapped KQL hunting content, a sanitized incident-triage exercise, and an approval-gated response-playbook design.
+NorthStar currently includes verified Microsoft Sentinel analytics controls, live aggregate telemetry validation, MITRE-mapped KQL hunting content, a sanitized incident-triage exercise, an approval-gated response-playbook design, and GitHub-hosted operational validation using least-privilege Azure OIDC.
 
 [View the implementation and validation matrix](docs/completion-matrix.md)
 

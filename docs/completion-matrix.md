@@ -16,6 +16,7 @@ This matrix distinguishes deployed controls, verified results, authored content,
 | Response playbook | ✅ Documented | Manual triage, escalation, and approval-gated containment procedure |
 | SOAR automation | 📘 Planned | Sentinel automation rule and Logic App design only; no destructive automation deployed |
 | GitHub content validation | ✅ Implemented | Required workflow validates KQL metadata and documentation hygiene |
+| Operational-state validation | ✅ Verified | Nine Azure and Sentinel checks passed locally and through GitHub Actions using least-privilege OIDC; sanitized JSON evidence uploaded as a workflow artifact |
 | Protected main branch | ✅ Implemented | Strict required check, administrator enforcement, linear history, conversation resolution, and destructive-action restrictions |
 
 ## Status Definitions

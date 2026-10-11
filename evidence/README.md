@@ -11,6 +11,7 @@ Screenshots must be cropped and sanitized before publication. Simulated evidence
 | `01-sentinel-analytics-rules.jpg` | Two enabled NorthStar scheduled analytics rules with Low and Medium severities | Microsoft Sentinel Analytics |
 | `02-sentinel-telemetry-validation.jpg` | Sanitized aggregate validation: 3 failed control-plane events, 571 WAF matches, and 1 protected resource | Log Analytics |
 | `03-github-protected-gate.jpg` | Required KQL/documentation validation, strict synchronization, conversation resolution, and linear history | GitHub branch protection |
+| `operational-validation/latest.json` | Nine successful expected-versus-actual checks covering Azure subscription, Log Analytics, Sentinel enablement, and analytics-rule configuration | PowerShell, Azure CLI, and Microsoft Sentinel |
 
 ## Evidence Gallery
 
@@ -25,3 +26,9 @@ Screenshots must be cropped and sanitized before publication. Simulated evidence
 ### Protected Delivery Gate
 
 ![GitHub protected security-content validation gate](screenshots/03-github-protected-gate.jpg)
+
+### Operational State Validation
+
+[View the sanitized 9/9 validation result](operational-validation/latest.json)
+
+[View the successful passwordless GitHub Actions run](https://github.com/gdiangana-alt/northstar-azure-security-operations/actions/runs/38154404431)
