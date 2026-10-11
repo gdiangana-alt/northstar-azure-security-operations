@@ -99,6 +99,18 @@ The repository will not publish tenant IDs, subscription IDs, workspace IDs, obj
 
 Screenshots and command output must be cropped or sanitized before publication.
 
+## Operational Validation Automation
+
+NorthStar includes a policy-driven PowerShell validator that compares the live Azure and Microsoft Sentinel environment with a version-controlled YAML manifest.
+
+The automation performs nine read-only checks, detects configuration drift, produces sanitized JSON evidence, and returns a non-zero exit code when expected controls are missing or misconfigured.
+
+GitHub Actions uses passwordless OIDC authentication through a dedicated managed identity with Reader access scoped to the security-operations resource group.
+
+[View the automation guide](automation/README.md)
+
+[View the implementation and recruiter report](docs/operational-validation-implementation.md)
+
 ## Cost Control
 
 Azure services will be introduced deliberately. Architecture, KQL content, incident templates, and test datasets will be prepared before enabling paid ingestion or retention.

@@ -1,0 +1,33 @@
+schema_version: "1.0"
+
+environment:
+  subscription_state: "Enabled"
+
+workspace:
+  name: "NorthStar-SOC-Workspace"
+  resource_group: "NorthStar-Azure-RG"
+  location: "canadacentral"
+  retention_days: 30
+
+sentinel:
+  solution_name: "SecurityInsights(northstar-soc-workspace)"
+  required_alert_rules:
+    - display_name: "Advanced Multistage Attack Detection"
+      kind: "Fusion"
+      enabled: true
+      severity: "High"
+
+    - display_name: "NorthStar - Failed Azure Control Plane Operation"
+      kind: "Scheduled"
+      enabled: true
+      severity: "Medium"
+
+    - display_name: "NorthStar - Application Gateway WAF Rule Match"
+      kind: "Scheduled"
+      enabled: true
+      severity: "Low"
+
+evidence:
+  output_format: "json"
+  prohibit_resource_ids: true
+  prohibit_guids: true
