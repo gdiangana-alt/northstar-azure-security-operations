@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-10-11T16:02:24.8587475Z",
+  "overall_status": "Passed",
+  "summary": {
+    "total_checks": 9,
+    "passed_checks": 9,
+    "failed_checks": 0
+  },
+  "target": {
+    "resource_group": "NorthStar-Azure-RG",
+    "workspace": "NorthStar-SOC-Workspace",
+    "location": "canadacentral"
+  },
+  "checks": [
+    {
+      "Name": "Azure subscription state",
+      "Expected": "Enabled",
+      "Actual": "Enabled",
+      "Passed": true
+    },
+    {
+      "Name": "Log Analytics workspace exists",
+      "Expected": "Present",
+      "Actual": "Present",
+      "Passed": true
+    },
+    {
+      "Name": "Workspace resource group",
+      "Expected": "NorthStar-Azure-RG",
+      "Actual": "NorthStar-Azure-RG",
+      "Passed": true
+    },
+    {
+      "Name": "Workspace location",
+      "Expected": "canadacentral",
+      "Actual": "canadacentral",
+      "Passed": true
+    },
+    {
+      "Name": "Workspace retention",
+      "Expected": 30,
+      "Actual": 30,
+      "Passed": true
+    },
+    {
+      "Name": "Microsoft Sentinel solution",
+      "Expected": "Present",
+      "Actual": "Present",
+      "Passed": true
+    },
+    {
+      "Name": "Sentinel rule: Advanced Multistage Attack Detection",
+      "Expected": "Enabled=True; Kind=Fusion; Severity=High",
+      "Actual": "Enabled=True; Kind=Fusion; Severity=High",
+      "Passed": true
+    },
+    {
+      "Name": "Sentinel rule: NorthStar - Failed Azure Control Plane Operation",
+      "Expected": "Enabled=True; Kind=Scheduled; Severity=Medium",
+      "Actual": "Enabled=True; Kind=Scheduled; Severity=Medium",
+      "Passed": true
+    },
+    {
+      "Name": "Sentinel rule: NorthStar - Application Gateway WAF Rule Match",
+      "Expected": "Enabled=True; Kind=Scheduled; Severity=Low",
+      "Actual": "Enabled=True; Kind=Scheduled; Severity=Low",
+      "Passed": true
+    }
+  ]
+}
