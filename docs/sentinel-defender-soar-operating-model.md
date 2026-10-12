@@ -1,6 +1,6 @@
 # NorthStar Sentinel and Approval-Gated SOAR Operating Model
 
-**Implementation date:** October 11, 2026  
+**Implementation date:** October 11, 2026
 **Status:** Live controls implemented and validated in the NorthStar portfolio environment
 
 ## Executive Summary

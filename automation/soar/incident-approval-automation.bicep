@@ -59,4 +59,3 @@ resource approvalAutomation 'Microsoft.SecurityInsights/automationRules@2025-09-
     ]
   }
 }
-
