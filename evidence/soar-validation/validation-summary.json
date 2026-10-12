@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0",
+  "implementation_date": "2026-10-11",
+  "environment": "NorthStar controlled portfolio lab",
+  "overall_status": "Passed",
+  "detection_engineering": {
+    "legacy_rule": {
+      "name": "NorthStar - Application Gateway WAF Rule Match",
+      "final_state": "Disabled",
+      "reason": "Any individual WAF match generated an incident without sufficient behavioral context."
+    },
+    "telemetry_baseline": {
+      "period_days": 30,
+      "waf_matches": 7404,
+      "distinct_clients": 347,
+      "distinct_paths": 842,
+      "distinct_rules": 46,
+      "active_five_minute_buckets": 485,
+      "p95_matches_per_active_bucket": 83,
+      "p99_matches_per_active_bucket": 251,
+      "peak_matches_per_active_bucket": 394
+    },
+    "replacement_rule": {
+      "name": "NorthStar - High-Confidence WAF Scanning Activity",
+      "final_state": "Enabled",
+      "severity": "Medium",
+      "mitre_tactic": "Reconnaissance",
+      "mitre_technique": "T1595",
+      "window_minutes": 5,
+      "thresholds": {
+        "minimum_matches": 100,
+        "minimum_distinct_rules": 10,
+        "minimum_distinct_paths": 30
+      },
+      "positive_validation": {
+        "candidate_events": 5,
+        "distinct_sources": 4,
+        "status": "Passed"
+      },
+      "negative_validation": {
+        "period_hours": 24,
+        "qualifying_events": 0,
+        "status": "Passed"
+      }
+    }
+  },
+  "incident_remediation": {
+    "legacy_waf_incidents_closed": 455,
+    "classification": "FalsePositive",
+    "classification_reason": "IncorrectAlertLogic",
+    "telemetry_deleted": false,
+    "final_queue": {
+      "total": 467,
+      "new": 0,
+      "active": 0,
+      "closed": 467
+    },
+    "status": "Passed"
+  },
+  "approval_automation": {
+    "name": "NorthStar - Require Approval for Medium and High Incidents",
+    "final_state": "Enabled",
+    "trigger": "Incident created",
+    "scope": "Medium and High severity incidents",
+    "actions": [
+      "Set incident status to Active",
+      "Add ApprovalRequired label",
+      "Create approval task"
+    ],
+    "positive_test": {
+      "severity": "Medium",
+      "approval_label_added": true,
+      "approval_task_created": true,
+      "status_changed_to_active": true,
+      "status": "Passed"
+    },
+    "negative_test": {
+      "severity": "Low",
+      "approval_label_added": false,
+      "approval_task_created": false,
+      "status_remained_new": true,
+      "status": "Passed"
+    }
+  },
+  "approved_response_playbook": {
+    "name": "NorthStar-Approved-Incident-Response",
+    "final_state": "Enabled",
+    "authentication": "System-assigned managed identity",
+    "playbook_identity_role": "Microsoft Sentinel Responder",
+    "human_operator_role": "Microsoft Sentinel Playbook Operator",
+    "sentinel_service_role": "Microsoft Sentinel Automation Contributor",
+    "runs_before_recorded_approval": 0,
+    "failure_path_observed": "Initial invocation was denied because required Sentinel playbook authorization was missing.",
+    "corrective_action": "Least-privilege Sentinel roles were assigned and the controlled invocation was retried.",
+    "final_run_status": "Succeeded",
+    "incident_comment_created": true,
+    "approval_required_label_preserved": true,
+    "response_approved_label_created": true,
+    "destructive_containment_executed": false,
+    "status": "Passed"
+  },
+  "security_controls": {
+    "read_only_detection_validation": true,
+    "human_approval_required_before_response": true,
+    "managed_identity_used": true,
+    "least_privilege_roles_used": true,
+    "credentials_stored_in_repository": false,
+    "resource_identifiers_published": false,
+    "ip_addresses_published": false
+  }
+}

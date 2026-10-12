@@ -24,8 +24,13 @@ sentinel:
 
     - display_name: "NorthStar - Application Gateway WAF Rule Match"
       kind: "Scheduled"
-      enabled: true
+      enabled: false
       severity: "Low"
+
+    - display_name: "NorthStar - High-Confidence WAF Scanning Activity"
+      kind: "Scheduled"
+      enabled: true
+      severity: "Medium"
 
 evidence:
   output_format: "json"

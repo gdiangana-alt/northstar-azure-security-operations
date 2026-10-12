@@ -1,0 +1,29 @@
+// Title: High-confidence Application Gateway WAF scanning activity
+// Data source: AzureDiagnostics
+// MITRE ATT&CK: T1595 - Active Scanning
+// Purpose: Detect concentrated WAF activity from one client across numerous rules and request paths within five minutes.
+// Tuning: Thresholds are based on 30 days of NorthStar telemetry; review after WAF mode, application traffic, or managed-rule changes.
+
+AzureDiagnostics
+| where ResourceType == "APPLICATIONGATEWAYS"
+| where Category == "ApplicationGatewayFirewallLog"
+| where action_s == "Matched"
+| extend ClientIp = tostring(clientIp_s)
+| summarize
+    WafMatches = count(),
+    DistinctRules = dcount(ruleId_s),
+    DistinctPaths = dcount(requestUri_s),
+    FirstObserved = min(TimeGenerated),
+    LastObserved = max(TimeGenerated)
+  by ClientIp, bin(TimeGenerated, 5m)
+| where WafMatches >= 100
+    and DistinctRules >= 10
+    and DistinctPaths >= 30
+| project
+    TimeGenerated,
+    FirstObserved,
+    LastObserved,
+    ClientIp,
+    WafMatches,
+    DistinctRules,
+    DistinctPaths
