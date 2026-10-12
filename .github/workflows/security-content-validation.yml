@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   validate:
-    name: Validate KQL and documentation
+    name: Validate KQL, Bicep, evidence, and documentation
     runs-on: ubuntu-latest
 
     steps:
@@ -34,3 +34,28 @@ jobs:
             grep -q "^// Purpose:" "$file"
             grep -q "^// Tuning:" "$file"
           done
+          python3 -m json.tool \
+            evidence/operational-validation/latest.json \
+            > /dev/null
+
+          python3 -m json.tool \
+            evidence/soar-validation/validation-summary.json \
+            > /dev/null
+
+          mapfile -t bicep_files < <(
+            find analytics automation -type f -name "*.bicep" | sort
+          )
+          test "${#bicep_files[@]}" -gt 0
+
+          for file in "${bicep_files[@]}"; do
+            az bicep build --file "$file" --stdout > /dev/null
+          done
+
+          if grep -ERIn \
+            '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|/subscriptions/[0-9a-fA-F-]{36}' \
+            docs/sentinel-defender-soar-operating-model.md \
+            evidence/soar-validation
+          then
+            echo "Sensitive identifier detected in public SOAR evidence."
+            exit 1
+          fi

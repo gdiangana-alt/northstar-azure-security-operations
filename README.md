@@ -1,3 +1,4 @@
+
 # NorthStar Azure Security Operations
 
 **Microsoft Sentinel, KQL Detection Engineering, Threat Hunting, and Incident Response Portfolio**
@@ -34,7 +35,12 @@ The NorthStar environment includes an enabled Microsoft Sentinel workspace, Fusi
 
 ## Current Implementation Status
 
-NorthStar currently includes verified Microsoft Sentinel analytics controls, live aggregate telemetry validation, MITRE-mapped KQL hunting content, a sanitized incident-triage exercise, an approval-gated response-playbook design, and GitHub-hosted operational validation using least-privilege Azure OIDC.
+NorthStar currently includes verified Microsoft Sentinel analytics controls, telemetry-based WAF detection tuning, MITRE-mapped KQL, remediated incident queues, approval-gated Sentinel automation, a managed-identity Logic App response playbook, and GitHub-hosted operational validation using least-privilege Azure OIDC.
+[View the implementation and validation matrix](docs/completion-matrix.md)
+
+[View the Sentinel and approval-gated SOAR operating model](docs/sentinel-defender-soar-operating-model.md)
+
+[View the sanitized SOAR validation evidence](evidence/soar-validation/validation-summary.json)
 
 [View the implementation and validation matrix](docs/completion-matrix.md)
 
@@ -103,7 +109,7 @@ Screenshots and command output must be cropped or sanitized before publication.
 
 NorthStar includes a policy-driven PowerShell validator that compares the live Azure and Microsoft Sentinel environment with a version-controlled YAML manifest.
 
-The automation performs nine read-only checks, detects configuration drift, produces sanitized JSON evidence, and returns a non-zero exit code when expected controls are missing or misconfigured.
+The automation performs ten read-only checks, detects configuration drift, produces sanitized JSON evidence, and returns a non-zero exit code when expected controls are missing or misconfigured.
 
 GitHub Actions uses passwordless OIDC authentication through a dedicated managed identity with Reader access scoped to the security-operations resource group.
 
